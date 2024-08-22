@@ -11,10 +11,11 @@ export const Banner = () => {
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(150 - Math.random() * 100);
   const [index, setIndex] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
   const toRotate = [
-    "Full-stack Web Developer",
-    "Computer Science Graduated",
-    "Front-End Designer",
+    "Junior Developer",
+    "Computer Science Graduate",
+    "Full-stack Applications Developer",
   ];
   const period = 2000;
 
@@ -55,6 +56,26 @@ export const Banner = () => {
     }
   };
 
+  useEffect(() => {
+    // Function to check screen size and set isMobile state
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    // Initial check on component mount
+    handleResize();
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <section className="banner" id="home">
       <Container>
@@ -68,32 +89,47 @@ export const Banner = () => {
                   }
                 >
                   <span className="tagline">Welcome to my Portfolio</span>
-                  <h1>
+                  <h1 className="bannerTitle">
                     {`About me:  `}{" "}
                     <span
                       className="txt-rotate"
                       dataPeriod="1000"
-                      data-rotate='[ "Full-stack Web Developer",
-                      "Computer Science Graduated",
-                      "Front-End Designer" ]'
+                      data-rotate='["Junior Developer",
+                      "Computer Science Graduate",
+                      "Full-stack Applications Developer",]'
                     >
                       <span className="wrap">{text}</span>
                     </span>
                   </h1>
-                  <p>
-                    My name is David Petrut!
-                    <br />
-                    I`m a Work dedicated individual, very confident in the
-                    technical skills I gained through my experience as a
-                    self-thought developer for various projects and websites
-                    that I have done, and skills that I earned as a computer
-                    science student in university. Looking to contribute to the
-                    success of a company. Enthusiastic to learn new skills
-                  </p>
+
+                  {isMobile ? (
+                    // Shortened summary for mobile view
+                    <p>
+                      I’m passionate about technology, with a strong
+                      foundation in Computer Science, ready to bring innovative
+                      solutions and growth to your team.
+                    </p>
+                  ) : (
+                    // Full introduction for larger screens
+                    <p>
+                      My name is David Petrut!
+                      <br />
+                      I`m passionate about technology and committed to
+                      continuous learning. Recent Computer Science graduate with
+                      practical experience in full-stack development, both
+                      freelance and through an internship. I've built individual
+                      projects that increased client sales and also worked in
+                      collaborations. I enjoy mentoring and learning new
+                      technologies, aiming to bring innovative solutions and a
+                      growth mindset spirit to your team.
+                    </p>
+                  )}
+
                   <button onClick={() => console.log("connect")}>
                     <a
                       className="whatsapp_link"
-                      href="https://wa.link/1md3pu"
+                      href="https://wa.me/+447305583508"
+                      // href="https://wa.link/1md3pu"
                       target="_blank"
                     >
                       Let’s Connect <ArrowRightCircle size={25} />
@@ -110,8 +146,13 @@ export const Banner = () => {
                   className={
                     isVisible ? "animate__animated animate__zoomIn" : ""
                   }
+                  id="parentImageBanner"
                 >
-                  <img src={headerImg} alt="Header Img" />
+                  <img
+                    className="imageBanner"
+                    src="https://media.licdn.com/dms/image/v2/D4D03AQHm3qA8ONp3EA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1718792682086?e=1729728000&v=beta&t=peg6XqBOrfl2gOBpN6QbTOBFLqb2F1Dx_XngRI0UgKs"
+                    alt="Header Img"
+                  />
                 </div>
               )}
             </TrackVisibility>

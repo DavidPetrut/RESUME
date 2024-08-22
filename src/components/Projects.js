@@ -1,43 +1,38 @@
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { ProjectCard } from "./ProjectCard";
-import projImg1 from "../assets/img/project-img1.png";
-import projImg2 from "../assets/img/project-img2.png";
-import projImg3 from "../assets/img/project-img3.png";
+import craiova from "../assets/img/craiova.png";
+import movieFlex from "../assets/img/movieFlex.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
+import explore_brasov from "../assets/img/explore_brasov.png";
+import cricket from "../assets/img/cricket3.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
+import { VscBook } from "react-icons/vsc";
 
 export const Projects = () => {
   const projects = [
     {
       title: "Business Startup",
       description: "Design & Development",
-      imgUrl: projImg1,
+      imgUrl: explore_brasov,
     },
     {
       title: "Business Startup",
       description: "Design & Development",
-      imgUrl: projImg2,
+      imgUrl: movieFlex,
     },
     {
       title: "Business Startup",
       description: "Design & Development",
-      imgUrl: projImg3,
+      imgUrl: craiova,
     },
+  ];
+
+  const projects2 = [
     {
       title: "Business Startup",
       description: "Design & Development",
-      imgUrl: projImg1,
-    },
-    {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg2,
-    },
-    {
-      title: "Business Startup",
-      description: "Design & Development",
-      imgUrl: projImg3,
+      imgUrl: cricket,
     },
   ];
 
@@ -54,12 +49,14 @@ export const Projects = () => {
                   }
                 >
                   <h2>Projects</h2>
+                  <br />
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    These are some of my projects that I`ve done.
+                    <br />
+                    All projects bellow are compatible for all screen sizes.
+                    <br />
+                    To access a project, simple hover and click the images
+                    bellow
                   </p>
                   <Tab.Container id="projects-tabs" defaultActiveKey="first">
                     <Nav
@@ -68,13 +65,13 @@ export const Projects = () => {
                       id="pills-tab"
                     >
                       <Nav.Item>
-                        <Nav.Link eventKey="first">Tab 1</Nav.Link>
+                        <Nav.Link eventKey="first">Websites</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="second">Tab 2</Nav.Link>
+                        <Nav.Link eventKey="second">Applications</Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="third">Tab 3</Nav.Link>
+                        <Nav.Link eventKey="third">Resume/CV</Nav.Link>
                       </Nav.Item>
                     </Nav>
                     <Tab.Content
@@ -90,22 +87,23 @@ export const Projects = () => {
                           })}
                         </Row>
                       </Tab.Pane>
-                      <Tab.Pane eventKey="section">
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Cumque quam, quod neque provident velit, rem
-                          explicabo excepturi id illo molestiae blanditiis,
-                          eligendi dicta officiis asperiores delectus quasi
-                          inventore debitis quo.
-                        </p>
+                      <Tab.Pane eventKey="second">
+                        <Row>
+                          {projects2.map((projects2, index) => {
+                            return <ProjectCard key={index} {...projects2} />;
+                          })}
+                        </Row>
                       </Tab.Pane>
                       <Tab.Pane eventKey="third">
                         <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Cumque quam, quod neque provident velit, rem
-                          explicabo excepturi id illo molestiae blanditiis,
-                          eligendi dicta officiis asperiores delectus quasi
-                          inventore debitis quo.
+                          This is my written RESUME/CV that you can access it as
+                          a PDF file, by clicking the little book icon
+                          <a
+                            href="https://drive.google.com/file/d/1FdrReLUGESuuw3WjtiOlUMpcW5DnlqMf/view"
+                            target="_blank"
+                          >
+                            <VscBook className="social-icon cv" />
+                          </a>
                         </p>
                       </Tab.Pane>
                     </Tab.Content>

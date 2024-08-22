@@ -1,15 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logoRESUME_mijlociu from "../assets/img/logoRESUME_mijlociu.png";
+import simona2 from "../assets/img/simona2.svg";
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/nav-icon2.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
 import { HashLink } from "react-router-hash-link";
 import { BrowserRouter as Router } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareGithub, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navbarToggleRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,22 +30,47 @@ export const NavBar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   const onUpdateActiveLink = (value) => {
     setActiveLink(value);
+    setMenuOpen(false);
+
+    if (navbarToggleRef.current) {
+      navbarToggleRef.current.click();
+    }
   };
 
   return (
     <Router>
-      <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
+      <Navbar
+        expand="md"
+        className={`${scrolled || menuOpen ? "scrolled" : ""}`}
+      >
         <Container>
-          <Navbar.Brand href="/">
-            <img src={logoRESUME_mijlociu} className="logo_resume" alt="Logo" />
+          <Navbar.Brand className="logoContainer" href="/">
+            <img src={simona2} className="logo_resume" alt="Logo" />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav">
-            <span className="navbar-toggler-icon"></span>
+
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={toggleMenu}
+            ref={navbarToggleRef} 
+          >
+            {menuOpen ? (
+              <FontAwesomeIcon className="x_burgerMenu" icon={faTimes} size="1x" /> // X icon when menu is open
+            ) : (
+              <span className="navbar-toggler-icon"></span>
+            )}
           </Navbar.Toggle>
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            className={menuOpen ? "show" : ""}
+          >
+            <Nav className="ms-auto burgerMenuNavigationLinks">
               <Nav.Link
                 href="#home"
                 className={
@@ -48,7 +78,7 @@ export const NavBar = () => {
                 }
                 onClick={() => onUpdateActiveLink("home")}
               >
-                Home
+                About Me
               </Nav.Link>
               <Nav.Link
                 href="#skills"
@@ -74,25 +104,29 @@ export const NavBar = () => {
             <span className="navbar-text">
               <div className="social-icon">
                 <a
-                  href="https://www.linkedin.com/in/david-petrut-b75561203/"
+                  href="https://www.linkedin.com/in/david-petrut/"
                   target="_blank"
+                  onClick={() => onUpdateActiveLink("connect")}
                 >
                   <img src={navIcon1} alt="" />
                 </a>
                 <a
-                  href="https://www.facebook.com/david.petrut.5/"
+                  href="https://github.com/DavidPetrut"
                   target="_blank"
+                  onClick={() => onUpdateActiveLink("connect")}
+                  className="gitLink"
                 >
-                  <img src={navIcon2} alt="" />
-                </a>
-                <a href="https://github.com/DavidPetrut" target="_blank">
-                  <img src={navIcon3} alt="" />
+                  <FontAwesomeIcon
+                    className="gitIcon"
+                    icon={faGithub}
+                    size="1x"
+                  />
                 </a>
               </div>
               <HashLink to="#connect">
-                  <button className="vvd">
-                    <span>Let’s Connect</span>
-                  </button>
+                <button className="vvd" onClick={() => onUpdateActiveLink("connect")}>
+                  <span>Let’s Connect</span>
+                </button>
               </HashLink>
             </span>
           </Navbar.Collapse>
