@@ -108,7 +108,7 @@ export const NavBar = () => {
                   target="_blank"
                   onClick={() => onUpdateActiveLink("connect")}
                 >
-                  <img src={navIcon1} alt="" />
+                  <img src={navIcon1} alt="" className="linkedInIcon"/>
                 </a>
                 <a
                   href="https://github.com/DavidPetrut"

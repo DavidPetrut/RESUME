@@ -170,6 +170,10 @@ span.navbar-text {
     hue-rotate(346deg) brightness(95%) contrast(86%);
 }
 
+.linkedInIcon {
+  padding-bottom: 4px;
+}
+
 .gitIcon {
   color: rgb(216, 216, 216) !important;
   border-radius: 50% !important;
@@ -191,6 +195,7 @@ span.navbar-text {
 }
 
 .imageBanner {
+  border: 2px solid white;
   height: fit-content;
   border-radius: 50%;
   width: auto;
@@ -347,6 +352,11 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   width: 96%;
 }
 
+.connectBannerButtons {
+  display: flex;
+  gap: 2vw;
+}
+
 .whatsapp_link {
   text-decoration: none;
   color: #fff;
@@ -408,6 +418,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   }
 
   .imageBanner {
+    border: 2px solid white;
     height: 30svh;
     border-radius: 50%;
     width: auto;

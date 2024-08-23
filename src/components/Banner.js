@@ -4,6 +4,7 @@ import headerImg from "../assets/img/header-img.svg";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
+import { Link, useHistory } from "react-router-dom";
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -18,6 +19,11 @@ export const Banner = () => {
     "Full-stack Applications Developer",
   ];
   const period = 2000;
+  const history = useHistory();
+
+  const handleButtonClick = () => {
+    history.push("/aboutMe");
+  };
 
   useEffect(() => {
     let ticker = setInterval(() => {
@@ -105,9 +111,9 @@ export const Banner = () => {
                   {isMobile ? (
                     // Shortened summary for mobile view
                     <p>
-                      I’m passionate about technology, with a strong
-                      foundation in Computer Science, ready to bring innovative
-                      solutions and growth to your team.
+                      I’m passionate about technology, with a strong foundation
+                      in Computer Science, ready to bring innovative solutions
+                      and growth to your team.
                     </p>
                   ) : (
                     // Full introduction for larger screens
@@ -116,25 +122,30 @@ export const Banner = () => {
                       <br />
                       I`m passionate about technology and committed to
                       continuous learning. Recent Computer Science graduate with
-                      practical experience in full-stack development, both
-                      freelance and through an internship. I've built individual
-                      projects that increased client sales and also worked in
-                      collaborations. I enjoy mentoring and learning new
+                      practical experience. I enjoy mentoring and learning new
                       technologies, aiming to bring innovative solutions and a
                       growth mindset spirit to your team.
                     </p>
                   )}
 
-                  <button onClick={() => console.log("connect")}>
-                    <a
+                  <div className="connectBannerButtons">
+                    <button onClick={() => console.log("connect")}>
+                      <a
+                        className="whatsapp_link"
+                        href="https://wa.me/+447305583508"
+                        // href="https://wa.link/1md3pu"
+                        target="_blank"
+                      >
+                        Let’s Connect <ArrowRightCircle size={25} />
+                      </a>
+                    </button>
+                    <button
                       className="whatsapp_link"
-                      href="https://wa.me/+447305583508"
-                      // href="https://wa.link/1md3pu"
-                      target="_blank"
+                      onClick={handleButtonClick}
                     >
-                      Let’s Connect <ArrowRightCircle size={25} />
-                    </a>
-                  </button>
+                      Read More <ArrowRightCircle size={25} />
+                    </button>
+                  </div>
                 </div>
               )}
             </TrackVisibility>
